@@ -1,0 +1,56 @@
+ using NAudio.Wave;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Media;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1.mehdi
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+         
+            Console.Write("Lütfen bir hayvan giriniz: ");
+            string hayvan = Console.ReadLine().ToLower();
+
+            string sesDosyasi = "";
+
+            if (hayvan == "kedi")
+                sesDosyasi = @"C:\Zula\WhatsApp Audio 2025-12-10 at 18.28.55.mpeg";
+            else if (hayvan == "köpek")
+                sesDosyasi = @"C:\Zula\köpeksesı.mpeg";
+            else if (hayvan == "aslan")
+                sesDosyasi = @"C:\Zula\aslansesi.mpeg";
+            else if (hayvan == "kuş")
+                sesDosyasi = @"C:\Zula\kuşsesi.mpeg";
+            else if (hayvan == "kurbağa")
+                sesDosyasi = @"C:\Zula\kurbağasesi.mpeg";
+            else if (hayvan == "maymun")
+                sesDosyasi = @"C:\Zula\maymunsesi.mpeg";
+            else
+            {
+                Console.WriteLine("Bu hayvan için ses bulunamadı.");
+                return;
+            }
+
+            using (var audioFile = new AudioFileReader(sesDosyasi))
+            using (var outputDevice = new WaveOutEvent())
+            {
+                outputDevice.Init(audioFile);
+                outputDevice.Play();
+
+                Console.WriteLine($"{hayvan} sesi çalınıyor...");
+                Console.ReadLine(); 
+            }
+
+
+
+
+
+        }
+    }
+    }
